@@ -1,0 +1,19 @@
+{
+    "idf.portWin": "COM21",
+    "idf.customExtraVars": {
+        "OPENOCD_SCRIPTS": "C:\\Users\\jribe\\.espressif\\tools\\openocd-esp32\\v0.12.0-esp32-20230921/openocd-esp32/share/openocd/scripts",
+        "IDF_CCACHE_ENABLE": "1",
+        "ESP_ROM_ELF_DIR": "C:\\Users\\jribe\\.espressif\\tools\\esp-rom-elfs\\20230320/",
+        "IDF_TARGET": "esp32s3"
+    },
+    "files.associations": {
+        "array": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
+    }
+}
