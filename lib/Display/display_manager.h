@@ -8,8 +8,8 @@
 #define SCREEN_HEIGHT 480
 #define GFX_BL        38  // Pino da luz de fundo
 
-extern Arduino_ESP32RGBPanel *bus;
-extern Arduino_ST7701_RGBPanel *gfx;
+extern Arduino_DataBus *bus;
+extern Arduino_RGB_Display *gfx;
 
 void display_init();
 void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);

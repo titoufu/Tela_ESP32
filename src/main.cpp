@@ -2,6 +2,8 @@
 #include "display_manager.h"
 #include "touch_manager.h"
 #include "ui.h"
+
+
 #include <WiFi.h>
 #include "WiFiConfigurator.h"
 #include <HTTPClient.h>

@@ -1,23 +1,43 @@
 #include "display_manager.h"
+#include <Arduino_GFX_Library.h>
 
-Arduino_ESP32RGBPanel *bus = new Arduino_ESP32RGBPanel(
-    39, 48, 47, 18, 17, 16, 21,
-    11, 12, 13, 14, 0,
-    8, 20, 3, 46, 9, 10,
-    4, 5, 6, 7, 15
-);
+#define GFX_BL 38
 
-Arduino_ST7701_RGBPanel *gfx = new Arduino_ST7701_RGBPanel(
-    bus, GFX_NOT_DEFINED, 0, true, SCREEN_WIDTH, SCREEN_HEIGHT,
-    st7701_type1_init_operations, sizeof(st7701_type1_init_operations), true,
-    10, 8, 50, 10, 8, 20
-);
+Arduino_DataBus *bus = new Arduino_SWSPI(
+    GFX_NOT_DEFINED /* DC */, 39 /* CS */,
+    48 /* SCK */, 47 /* MOSI */, GFX_NOT_DEFINED /* MISO */);
+  
+  
+  Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
+    18 /* DE */, 17 /* VSYNC */, 16 /* HSYNC */, 21 /* PCLK */,
+    11 /* R0 */, 12 /* R1 */, 13 /* R2 */, 14 /* R3 */, 0 /* R4 */,
+    8 /* G0 */, 20 /* G1 */, 3 /* G2 */, 46 /* G3 */, 9 /* G4 */, 10 /* G5 */,
+    4 /* B0 */, 5 /* B1 */, 6 /* B2 */, 7 /* B3 */, 15 /* B4 */,
+    1 /* hsync_polarity */, 10 /* hsync_front_porch */, 8 /* hsync_pulse_width */, 50 /* hsync_back_porch */,
+    1 /* vsync_polarity */, 10 /* vsync_front_porch */, 8 /* vsync_pulse_width */, 20 /* vsync_back_porch */);
+  
+  #define init_st7701 st7701_type9_init_operations  // Verifique se esta é a correta!
+  
+  Arduino_RGB_Display *gfx = new Arduino_RGB_Display(
+    480 /* width */, 480 /* height */, 
+    rgbpanel, 0 /* rotation */, true /* auto_flush */,
+    bus,  // Agora passando corretamente como Arduino_DataBus*
+    GFX_NOT_DEFINED /* RST */, 
+    init_st7701, sizeof(init_st7701),
+    0, 0, 0, 0  // Parâmetros adicionais exigidos pelo novo construtor
+  );
+  
+  
+/*******************************************************************************
+ * End of Arduino_GFX setting
+ ******************************************************************************/
 
 static lv_disp_draw_buf_t draw_buf;
 static lv_color_t buf1[SCREEN_WIDTH * 10];
 
 void display_init() {
     gfx->begin(16000000);
+   // gfx->invertDisplay(true);  // comando importante !!
     gfx->fillScreen(WHITE);
 
     pinMode(GFX_BL, OUTPUT);
