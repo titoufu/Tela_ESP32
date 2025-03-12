@@ -1,0 +1,3 @@
+- Sempre use `pio pkg list` para verificar bibliotecas antes de editar `platformio.ini`.
+- Após remover uma biblioteca do `platformio.ini`, rode `pio pkg cache clean` para evitar referências antigas.
+- Se houver problemas de compilação estranhos, apague `.pio/libdeps/` e rode `pio run -t clean` antes de compilar novamente.- 
