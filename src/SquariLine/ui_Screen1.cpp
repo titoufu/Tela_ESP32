@@ -25,32 +25,24 @@ void ui_Screen1_screen_init(void)
   // O SINAL A REDE
 
   wifiStatus = lv_label_create(ui_Container1);
-  lv_obj_set_width(wifiStatus, LV_SIZE_CONTENT);   
-  lv_obj_set_height(wifiStatus, LV_SIZE_CONTENT);  
+  lv_obj_set_width(wifiStatus, LV_SIZE_CONTENT);
+  lv_obj_set_height(wifiStatus, LV_SIZE_CONTENT);
   lv_obj_set_align(wifiStatus, LV_ALIGN_LEFT_MID);
 
   ssidLabel = lv_label_create(ui_Container1);
-  lv_obj_set_width(ssidLabel, LV_SIZE_CONTENT);   
-  lv_obj_set_height(ssidLabel, LV_SIZE_CONTENT);  
+  lv_obj_set_width(ssidLabel, LV_SIZE_CONTENT);
+  lv_obj_set_height(ssidLabel, LV_SIZE_CONTENT);
   lv_obj_set_x(ssidLabel, -167);
   lv_obj_set_y(ssidLabel, -1);
   lv_obj_set_align(ssidLabel, LV_ALIGN_CENTER);
- 
-  if (WiFi.status() != WL_CONNECTED)
-  {
-    lv_label_set_text(ssidLabel, "SEM WI-FI");
-    lv_label_set_text(wifiStatus, LV_SYMBOL_WARNING); /*Set the labels text*/
-  }
-  else
-  {
-    lv_label_set_text(wifiStatus, LV_SYMBOL_WIFI);     /*Set the labels text*/
-    lv_label_set_text(ssidLabel, WiFi.SSID().c_str()); /*Set the labels text*/
-  }
+
+  lv_label_set_text(ssidLabel, " ");
+  lv_label_set_text(wifiStatus, LV_SYMBOL_WIFI);     /*Set the labels text*/
+  
 
   lv_obj_set_style_text_color(wifiStatus, lv_color_hex(0xFFFEFE), LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_text_opa(wifiStatus, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
   lv_obj_set_style_text_color(ssidLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_text_opa(ssidLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-  Serial.println("Tela principal (ui_Screen1) criada.");
 }
